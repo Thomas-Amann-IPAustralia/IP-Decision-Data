@@ -1,0 +1,153 @@
+name: IP Corpus Filter
+
+# ---------------------------------------------------------------------------
+# Triggers
+# ---------------------------------------------------------------------------
+on:
+  workflow_dispatch:          # Manual trigger from the Actions tab
+    inputs:
+      resume:
+        description: "Resume an interrupted run (skip already-written docs)"
+        required: false
+        default: "false"
+        type: choice
+        options: ["true", "false"]
+      dry_run:
+        description: "Dry run — count matches only, write nothing"
+        required: false
+        default: "false"
+        type: choice
+        options: ["true", "false"]
+
+  schedule:
+    # Re-run every Sunday at 02:00 UTC to pick up corpus updates.
+    # Remove this block if you only want manual runs.
+    - cron: "0 2 * * 0"
+
+# ---------------------------------------------------------------------------
+# Permissions (needed to push the results back to the repo)
+# ---------------------------------------------------------------------------
+permissions:
+  contents: write
+
+jobs:
+  filter:
+    name: Stream → Filter → Commit
+    runs-on: ubuntu-latest
+
+    # The Open Australian Legal Corpus is ~230 k documents.
+    # Streaming + filtering typically completes in 30–90 minutes.
+    # GitHub Actions caps jobs at 6 hours; we stay well inside that.
+    timeout-minutes: 360
+
+    steps:
+      # -----------------------------------------------------------------------
+      # 1. Checkout
+      # -----------------------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Full history so we can push commits
+          fetch-depth: 1
+
+      # -----------------------------------------------------------------------
+      # 2. Python setup
+      # -----------------------------------------------------------------------
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # -----------------------------------------------------------------------
+      # 3. Restore previous output (enables --resume on re-runs)
+      # -----------------------------------------------------------------------
+      # We cache the output directory between runs so that --resume can skip
+      # documents already written without re-streaming from the beginning.
+      # The cache key includes the week number so it refreshes weekly on the
+      # scheduled run, picking up any new corpus documents.
+      - name: Restore output cache
+        uses: actions/cache@v4
+        with:
+          path: output/
+          key: ip-output-${{ runner.os }}-week-${{ steps.week.outputs.week }}
+          restore-keys: ip-output-${{ runner.os }}-
+
+      - name: Get ISO week number
+        id: week
+        run: echo "week=$(date +%Y-W%V)" >> "$GITHUB_OUTPUT"
+
+      # -----------------------------------------------------------------------
+      # 4. Run the filter
+      # -----------------------------------------------------------------------
+      - name: Filter IP documents
+        run: |
+          ARGS=""
+          if [ "${{ github.event.inputs.resume }}" = "true" ]; then
+            ARGS="$ARGS --resume"
+          fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          python scripts/filter_ip.py $ARGS
+
+      # -----------------------------------------------------------------------
+      # 5. Build summary + index
+      # -----------------------------------------------------------------------
+      - name: Generate summary and index
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: python scripts/summarise_ip.py
+
+      # -----------------------------------------------------------------------
+      # 6. Upload full JSONL as a workflow artifact
+      #    (ip_docs.jsonl is large and git-ignored; retrieve it from here)
+      # -----------------------------------------------------------------------
+      - name: Upload ip_docs.jsonl artifact
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ip-docs-${{ github.run_number }}
+          path: output/ip_docs.jsonl
+          # Artifacts are retained for 90 days on free plans
+          retention-days: 90
+          if-no-files-found: warn
+
+      # -----------------------------------------------------------------------
+      # 7. Commit lightweight outputs back to the repo
+      #    (index, summary, stats, log — NOT the large ip_docs.jsonl)
+      # -----------------------------------------------------------------------
+      - name: Commit results to repository
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Stage only the lightweight files
+          git add \
+            output/ip_index.jsonl \
+            output/ip_summary.md \
+            output/filter_stats.json \
+            output/filter_run.log \
+            || true
+
+          # Only commit if there are staged changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore(corpus): update IP document index [skip ci]
+
+          Run: ${{ github.run_number }}
+          Trigger: ${{ github.event_name }}
+          Commit: ${{ github.sha }}"
+
+            git push
+          fi

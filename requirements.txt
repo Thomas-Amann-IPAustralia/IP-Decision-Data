@@ -1,0 +1,12 @@
+# Core dataset streaming
+datasets>=2.19.0
+huggingface_hub>=0.23.0
+
+# Faster JSON parsing (optional but recommended for large JSONL files)
+orjson>=3.9.0
+
+# spaCy — for downstream NLP tasks on the filtered corpus
+spacy>=3.7.0
+
+# Useful for text normalisation
+ftfy>=6.2.0
