@@ -98,6 +98,13 @@ IP_CONCEPTS: list[str] = [
     "moral rights",
     "fair dealing",
     "compulsory licence",
+    "design infringement",
+    "breach of confidence",
+    "confidential information",
+    "counterfeit",
+    "trade secret",
+    "misappropriation",
+    "unauthorised use",
 ]
 
 # Pre-compile patterns for speed
