@@ -15,10 +15,15 @@ Usage:
 
 import json
 import logging
+import re
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
+
+# Allow importing filter_ip from the same directory when run as a script
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from filter_ip import IP_ACTS
 
 OUTPUT_DIR = Path("output")
 INPUT_FILE = OUTPUT_DIR / "ip_docs.jsonl"
@@ -50,24 +55,12 @@ def load_docs(path: Path):
 def extract_act_references(text: str, citation: str) -> list[str]:
     """
     Return a deduplicated list of IP act names found in text or citation.
+    Uses the same IP_ACTS list as filter_ip.py for consistency.
     Ordered by first appearance.
     """
-    import re
-
-    ACTS = [
-        "Trade Marks Act",
-        "Patents Act",
-        "Copyright Act",
-        "Designs Act",
-        "Plant Breeder",
-        "Circuit Layouts Act",
-        "Olympic Insignia",
-        "Geographical Indications",
-        "Intellectual Property Laws Amendment",
-    ]
     found = []
     combined = f"{citation} {text[:8_000]}"
-    for act in ACTS:
+    for act in IP_ACTS:
         if re.search(re.escape(act), combined, re.IGNORECASE) and act not in found:
             found.append(act)
     return found

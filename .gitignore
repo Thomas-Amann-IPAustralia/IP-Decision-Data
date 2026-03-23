@@ -1,0 +1,15 @@
+# Large filtered corpus — download from GitHub Actions artifacts instead
+output/ip_docs.jsonl
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db

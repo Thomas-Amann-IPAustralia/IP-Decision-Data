@@ -47,7 +47,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # Full history so we can push commits
+          # Shallow clone — sufficient for filter-and-push workflow
           fetch-depth: 1
 
       # -----------------------------------------------------------------------
@@ -75,16 +75,16 @@ jobs:
       # documents already written without re-streaming from the beginning.
       # The cache key includes the week number so it refreshes weekly on the
       # scheduled run, picking up any new corpus documents.
+      - name: Get ISO week number
+        id: week
+        run: echo "week=$(date +%Y-W%V)" >> "$GITHUB_OUTPUT"
+
       - name: Restore output cache
         uses: actions/cache@v4
         with:
           path: output/
           key: ip-output-${{ runner.os }}-week-${{ steps.week.outputs.week }}
           restore-keys: ip-output-${{ runner.os }}-
-
-      - name: Get ISO week number
-        id: week
-        run: echo "week=$(date +%Y-W%V)" >> "$GITHUB_OUTPUT"
 
       # -----------------------------------------------------------------------
       # 4. Run the filter
