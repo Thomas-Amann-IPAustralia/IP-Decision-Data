@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-04-12T05:33:05.198369+00:00",
+  "run_at": "2026-04-19T05:35:40.665555+00:00",
   "total_streamed": 232560,
   "total_fast_forwarded": 0,
   "total_evaluated": 232560,
@@ -10,7 +10,7 @@
     "body_act": 4154,
     "metadata_act": 226
   },
-  "elapsed_seconds": 2652.3,
+  "elapsed_seconds": 2575.2,
   "output_file": "output/ip_docs.jsonl",
   "ip_acts_in_scope": [
     "Trade Marks Act",
