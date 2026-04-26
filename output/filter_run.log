@@ -258,3 +258,68 @@
 2026-04-19T05:35:40  INFO        Output file:                  output/ip_docs.jsonl  (593.6 MB)
 2026-04-19T05:35:40  INFO        Stats written to:             output/filter_stats.json
 2026-04-19T05:35:40  INFO      ============================================================
+2026-04-26T05:13:30  INFO      ============================================================
+2026-04-26T05:13:30  INFO      filter_ip.py — Open Australian Legal Corpus IP filter
+2026-04-26T05:13:30  INFO      Started at 2026-04-26T05:13:30.260832+00:00
+2026-04-26T05:13:30  INFO      dry_run=False  resume=False
+2026-04-26T05:13:31  INFO      Loading corpus stream (this may take a moment)…
+2026-04-26T05:14:39  INFO      Progress: 5,000 streamed | 207 matched | 75 docs/sec
+2026-04-26T05:15:46  INFO      Progress: 10,000 streamed | 410 matched | 75 docs/sec
+2026-04-26T05:16:54  INFO      Progress: 15,000 streamed | 651 matched | 74 docs/sec
+2026-04-26T05:17:58  INFO      Progress: 20,000 streamed | 841 matched | 75 docs/sec
+2026-04-26T05:18:59  INFO      Progress: 25,000 streamed | 1,013 matched | 77 docs/sec
+2026-04-26T05:20:00  INFO      Progress: 30,000 streamed | 1,204 matched | 77 docs/sec
+2026-04-26T05:21:05  INFO      Progress: 35,000 streamed | 1,444 matched | 77 docs/sec
+2026-04-26T05:22:09  INFO      Progress: 40,000 streamed | 1,662 matched | 77 docs/sec
+2026-04-26T05:23:12  INFO      Progress: 45,000 streamed | 1,834 matched | 78 docs/sec
+2026-04-26T05:24:14  INFO      Progress: 50,000 streamed | 2,010 matched | 78 docs/sec
+2026-04-26T05:25:19  INFO      Progress: 55,000 streamed | 2,193 matched | 78 docs/sec
+2026-04-26T05:26:21  INFO      Progress: 60,000 streamed | 2,392 matched | 78 docs/sec
+2026-04-26T05:27:25  INFO      Progress: 65,000 streamed | 2,596 matched | 78 docs/sec
+2026-04-26T05:28:28  INFO      Progress: 70,000 streamed | 2,805 matched | 78 docs/sec
+2026-04-26T05:29:31  INFO      Progress: 75,000 streamed | 2,979 matched | 78 docs/sec
+2026-04-26T05:30:34  INFO      Progress: 80,000 streamed | 3,181 matched | 78 docs/sec
+2026-04-26T05:31:37  INFO      Progress: 85,000 streamed | 3,436 matched | 78 docs/sec
+2026-04-26T05:32:40  INFO      Progress: 90,000 streamed | 3,584 matched | 78 docs/sec
+2026-04-26T05:33:44  INFO      Progress: 95,000 streamed | 3,678 matched | 78 docs/sec
+2026-04-26T05:34:49  INFO      Progress: 100,000 streamed | 3,776 matched | 78 docs/sec
+2026-04-26T05:35:52  INFO      Progress: 105,000 streamed | 3,945 matched | 78 docs/sec
+2026-04-26T05:36:56  INFO      Progress: 110,000 streamed | 4,170 matched | 78 docs/sec
+2026-04-26T05:37:58  INFO      Progress: 115,000 streamed | 4,326 matched | 78 docs/sec
+2026-04-26T05:39:00  INFO      Progress: 120,000 streamed | 4,515 matched | 79 docs/sec
+2026-04-26T05:40:03  INFO      Progress: 125,000 streamed | 4,691 matched | 79 docs/sec
+2026-04-26T05:41:05  INFO      Progress: 130,000 streamed | 4,892 matched | 79 docs/sec
+2026-04-26T05:42:08  INFO      Progress: 135,000 streamed | 5,072 matched | 79 docs/sec
+2026-04-26T05:43:11  INFO      Progress: 140,000 streamed | 5,250 matched | 79 docs/sec
+2026-04-26T05:44:16  INFO      Progress: 145,000 streamed | 5,436 matched | 79 docs/sec
+2026-04-26T05:45:20  INFO      Progress: 150,000 streamed | 5,604 matched | 79 docs/sec
+2026-04-26T05:46:23  INFO      Progress: 155,000 streamed | 5,801 matched | 79 docs/sec
+2026-04-26T05:47:26  INFO      Progress: 160,000 streamed | 5,980 matched | 79 docs/sec
+2026-04-26T05:48:28  INFO      Progress: 165,000 streamed | 6,155 matched | 79 docs/sec
+2026-04-26T05:49:28  INFO      Progress: 170,000 streamed | 6,319 matched | 79 docs/sec
+2026-04-26T05:50:29  INFO      Progress: 175,000 streamed | 6,492 matched | 79 docs/sec
+2026-04-26T05:51:32  INFO      Progress: 180,000 streamed | 6,673 matched | 79 docs/sec
+2026-04-26T05:52:28  INFO      Progress: 185,000 streamed | 7,023 matched | 79 docs/sec
+2026-04-26T05:53:06  INFO      Progress: 190,000 streamed | 7,230 matched | 80 docs/sec
+2026-04-26T05:53:53  INFO      Progress: 195,000 streamed | 7,399 matched | 81 docs/sec
+2026-04-26T05:54:21  INFO      Progress: 200,000 streamed | 7,558 matched | 82 docs/sec
+2026-04-26T05:54:48  INFO      Progress: 205,000 streamed | 7,714 matched | 83 docs/sec
+2026-04-26T05:55:11  INFO      Progress: 210,000 streamed | 7,893 matched | 84 docs/sec
+2026-04-26T05:55:37  INFO      Progress: 215,000 streamed | 8,071 matched | 85 docs/sec
+2026-04-26T05:56:01  INFO      Progress: 220,000 streamed | 8,218 matched | 86 docs/sec
+2026-04-26T05:56:48  INFO      Progress: 225,000 streamed | 8,502 matched | 87 docs/sec
+2026-04-26T05:58:50  INFO      Progress: 230,000 streamed | 8,773 matched | 85 docs/sec
+2026-04-26T05:59:57  INFO      ============================================================
+2026-04-26T05:59:57  INFO      COMPLETE
+2026-04-26T05:59:57  INFO        Documents streamed (total):   232,560
+2026-04-26T05:59:57  INFO        Documents fast-forwarded:     0
+2026-04-26T05:59:57  INFO        Documents evaluated:          232,560
+2026-04-26T05:59:57  INFO        IP documents matched:         8,900  (3.83%)
+2026-04-26T05:59:57  INFO        Match reasons breakdown:
+2026-04-26T05:59:57  INFO          body_concept              4,520
+2026-04-26T05:59:57  INFO          body_act                  4,154
+2026-04-26T05:59:57  INFO          metadata_act              226
+2026-04-26T05:59:57  INFO        Wall time:                    46.4 min
+2026-04-26T05:59:57  INFO        Output file:                  output/ip_docs.jsonl  (593.6 MB)
+2026-04-26T05:59:57  INFO        Stats written to:             output/filter_stats.json
+2026-04-26T05:59:57  INFO      ============================================================
