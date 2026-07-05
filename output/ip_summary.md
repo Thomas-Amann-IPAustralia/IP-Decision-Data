@@ -1,6 +1,6 @@
 # IP Corpus — Filter Summary
 
-*Generated: 2026-06-28 07:10 UTC*  
+*Generated: 2026-07-05 06:55 UTC*  
 *Source: [isaacus/open-australian-legal-corpus](https://huggingface.co/datasets/isaacus/open-australian-legal-corpus)*
 
 ---
