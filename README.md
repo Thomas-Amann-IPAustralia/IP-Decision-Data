@@ -21,6 +21,8 @@ See [`scripts/filter_ip.py`](scripts/filter_ip.py) for the full keyword lists.
 ├── .github/
 │   └── workflows/
 │       └── ip_filter.yml       # GitHub Actions workflow (free, unlimited for public repos)
+├── docs/
+│   └── data_dictionary.md      # Field-by-field reference for every output file
 ├── scripts/
 │   ├── filter_ip.py            # Stream → filter → write ip_docs.jsonl
 │   └── summarise_ip.py         # Build ip_index.jsonl + ip_summary.md
@@ -32,6 +34,8 @@ See [`scripts/filter_ip.py`](scripts/filter_ip.py) for the full keyword lists.
 ├── requirements.txt
 └── .gitignore                  # ip_docs.jsonl excluded (retrieve from Actions artifact)
 ```
+
+See [`docs/data_dictionary.md`](docs/data_dictionary.md) for a full field-by-field reference of every file the pipeline produces, including the schema of `ip_docs.jsonl` (inherited from the source corpus), the enumerated values for `jurisdiction`/`type`/`match_reason`, and known limitations.
 
 ## Running locally
 
